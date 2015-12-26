@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     private var tipPercentages = [15, 20, 25]
 
     override func viewDidAppear(animated: Bool) {
-        if billAmountField.text.isEmpty {
+        if billAmountField.text!.isEmpty {
             billAmountField.becomeFirstResponder()
         }
     }
@@ -32,9 +32,10 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for (index, percentage) in enumerate(tipPercentages) {
+        for (index, percentage) in tipPercentages.enumerate() {
             tipPercentageControl.setTitle(String(percentage) + "%" , forSegmentAtIndex: index)
         }
+        numOfPeople = Int(numOfPeopleSlider.value)
         tipPercentage = 0.01 * Double(tipPercentages[tipPercentageControl.selectedSegmentIndex])
         updateLabelTexts()
     }
@@ -46,7 +47,7 @@ class MainViewController: UIViewController {
     // MARK: actions
 
     @IBAction func onBillAmountFieldEditingChanged(sender: AnyObject) {
-        billAmount = NSString(string: billAmountField.text).doubleValue
+        billAmount = NSString(string: billAmountField.text!).doubleValue
         updateLabelTexts()
     }
 
