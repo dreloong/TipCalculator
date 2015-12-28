@@ -11,17 +11,31 @@ import UIKit
 class MainViewController: UIViewController {
 
     @IBOutlet weak var billAmountField: UITextField!
-    @IBOutlet weak var numOfPeopleLabel: UILabel!
-    @IBOutlet weak var numOfPeopleSlider: UISlider!
+    @IBOutlet weak var inputsView: UIView!
+    @IBOutlet weak var numOfPeopleStepper: UIStepperWithLabel!
     @IBOutlet weak var perPersonAmountLabel: UILabel!
+    @IBOutlet weak var resultsView: UIView!
     @IBOutlet weak var tipAmountLabel: UILabel!
-    @IBOutlet weak var tipPercentageControl: UISegmentedControl!
+    @IBOutlet weak var tipPercentageStepper: UIStepperWithLabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
 
-    private var billAmount: Double = 0
-    private var numOfPeople: Int = 1
-    private var tipPercentage: Double = 0
-    private var tipPercentages = [15, 20, 25]
+    private var billAmount: Double = 0 {
+        didSet {
+            updateLabelTexts()
+        }
+    }
+
+    private var numOfPeople: Int = 1 {
+        didSet {
+            updateLabelTexts()
+        }
+    }
+
+    private var tipPercentage: Double = 0 {
+        didSet {
+            updateLabelTexts()
+        }
+    }
 
     override func viewDidAppear(animated: Bool) {
         if billAmountField.text!.isEmpty {
@@ -32,11 +46,13 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        for (index, percentage) in tipPercentages.enumerate() {
-            tipPercentageControl.setTitle(String(percentage) + "%" , forSegmentAtIndex: index)
-        }
-        numOfPeople = Int(numOfPeopleSlider.value)
-        tipPercentage = 0.01 * Double(tipPercentages[tipPercentageControl.selectedSegmentIndex])
+        inputsView.layer.borderWidth = CGFloat(1)
+        inputsView.layer.borderColor = self.view.tintColor.CGColor
+        resultsView.layer.borderWidth = CGFloat(1)
+        resultsView.layer.borderColor = self.view.tintColor.CGColor
+
+        numOfPeople = numOfPeopleStepper.value
+        tipPercentage = 0.01 * Double(tipPercentageStepper.value)
         updateLabelTexts()
     }
 
@@ -48,21 +64,18 @@ class MainViewController: UIViewController {
 
     @IBAction func onBillAmountFieldEditingChanged(sender: AnyObject) {
         billAmount = NSString(string: billAmountField.text!).doubleValue
-        updateLabelTexts()
     }
 
     @IBAction func onMainViewTap(sender: AnyObject) {
         view.endEditing(true)
     }
 
-    @IBAction func onNumOfPeopleSliderValueChanged(sender: AnyObject) {
-        numOfPeople = Int(numOfPeopleSlider.value)
-        updateLabelTexts()
+    @IBAction func onNumOfPeopleValueChanged(sender: AnyObject) {
+        numOfPeople = numOfPeopleStepper.value
     }
 
-    @IBAction func onTipPercentageControlValueChanged(sender: AnyObject) {
-        tipPercentage = 0.01 * Double(tipPercentages[tipPercentageControl.selectedSegmentIndex])
-        updateLabelTexts()
+    @IBAction func onTipPercentageValueChanged(sender: AnyObject) {
+        tipPercentage = 0.01 * Double(tipPercentageStepper.value)
     }
 
     // MARK: helpers
@@ -73,7 +86,6 @@ class MainViewController: UIViewController {
         tipAmountLabel.text = String(format: "%.2f", tipAmount)
         totalAmountLabel.text = String(format: "%.2f", totalAmount)
         perPersonAmountLabel.text = String(format: "%.2f", totalAmount / Double(numOfPeople))
-        numOfPeopleLabel.text = String(numOfPeople)
     }
 
 }
