@@ -25,21 +25,23 @@ class MainViewController: UIViewController {
         }
     }
 
-    private var numOfPeople: Int = 1 {
-        didSet {
-            updateLabelTexts()
-        }
-    }
-
-    private var tipPercentage: Double = 0 {
-        didSet {
-            updateLabelTexts()
-        }
-    }
-
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
         if billAmountField.text!.isEmpty {
             billAmountField.becomeFirstResponder()
+        }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey("default_tip_percentage_updated") {
+            tipPercentageStepper.value = defaults.integerForKey("default_tip_percentage")
+            defaults.setBool(false, forKey: "default_tip_percentage_updated")
+            defaults.synchronize()
+            updateLabelTexts()
         }
     }
 
@@ -51,8 +53,8 @@ class MainViewController: UIViewController {
         resultsView.layer.borderWidth = CGFloat(1)
         resultsView.layer.borderColor = self.view.tintColor.CGColor
 
-        numOfPeople = numOfPeopleStepper.value
-        tipPercentage = 0.01 * Double(tipPercentageStepper.value)
+        tipPercentageStepper.value =
+            NSUserDefaults.standardUserDefaults().integerForKey("default_tip_percentage")
         updateLabelTexts()
     }
 
@@ -71,21 +73,22 @@ class MainViewController: UIViewController {
     }
 
     @IBAction func onNumOfPeopleValueChanged(sender: AnyObject) {
-        numOfPeople = numOfPeopleStepper.value
+        updateLabelTexts()
     }
 
     @IBAction func onTipPercentageValueChanged(sender: AnyObject) {
-        tipPercentage = 0.01 * Double(tipPercentageStepper.value)
+        updateLabelTexts()
     }
 
     // MARK: helpers
 
     private func updateLabelTexts() {
-        let tipAmount = billAmount * tipPercentage
+        let tipAmount = billAmount * Double(tipPercentageStepper.value) * 0.01
         let totalAmount = billAmount + tipAmount
         tipAmountLabel.text = String(format: "%.2f", tipAmount)
         totalAmountLabel.text = String(format: "%.2f", totalAmount)
-        perPersonAmountLabel.text = String(format: "%.2f", totalAmount / Double(numOfPeople))
+        perPersonAmountLabel.text =
+            String(format: "%.2f", totalAmount / Double(numOfPeopleStepper.value))
     }
 
 }

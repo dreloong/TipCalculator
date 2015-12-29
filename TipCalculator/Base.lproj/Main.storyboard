@@ -51,10 +51,7 @@
                                         <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
-                                        <integer key="value" value="100"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="value">
-                                        <integer key="value" value="15"/>
+                                        <integer key="value" value="99"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="labelWidthWeight">
                                         <real key="value" value="0.72999999999999998"/>
@@ -151,7 +148,14 @@
                             <outletCollection property="gestureRecognizers" destination="wX7-gP-8Xd" appends="YES" id="jX6-E6-NR6"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="TipCalculator" id="NzU-1E-NwQ"/>
+                    <navigationItem key="navigationItem" title="TipCalculator" id="NzU-1E-NwQ">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Wb3-Nz-I8H"/>
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Wsd-Gj-zEm">
+                            <connections>
+                                <segue destination="RCf-cr-z95" kind="push" id="EqJ-zA-7mP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="billAmountField" destination="Jbz-yk-W30" id="8B3-L0-AbR"/>
                         <outlet property="inputsView" destination="7VF-sS-GLv" id="kAD-zG-n9E"/>
@@ -170,7 +174,88 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="730" y="317"/>
+            <point key="canvasLocation" x="700" y="300"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="puR-Mq-pXJ">
+            <objects>
+                <tableViewController id="RCf-cr-z95" customClass="SettingsTableViewController" customModule="TipCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="WYJ-1I-V5g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="znO-je-nry">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="mDc-Ad-YOc" detailTextLabel="kn9-vo-4E4" style="IBUITableViewCellStyleValue1" id="tWv-NC-M8N">
+                                        <rect key="frame" x="0.0" y="99" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tWv-NC-M8N" id="qk0-lY-bYO">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Default Tip Percentage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mDc-Ad-YOc">
+                                                    <rect key="frame" x="15" y="12" width="167" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kn9-vo-4E4">
+                                                    <rect key="frame" x="243" y="12" width="42" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4ub-8A-qpO" kind="push" id="Ora-pf-rBh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="RCf-cr-z95" id="Gm4-la-gMS"/>
+                            <outlet property="delegate" destination="RCf-cr-z95" id="Ryd-sR-orD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="XrX-Fx-qbW">
+                        <barButtonItem key="backBarButtonItem" title=" " id="ZnU-B1-D3W"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="defaultTipPercentageLabel" destination="kn9-vo-4E4" id="UHM-Wr-6Hc"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="thV-fg-lLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1200" y="300"/>
+        </scene>
+        <!--Default Tip Percentage-->
+        <scene sceneID="o6q-Sn-PE1">
+            <objects>
+                <viewController id="4ub-8A-qpO" customClass="DefaultTipPercentageViewController" customModule="TipCalculator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GEZ-OQ-Z6y">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" id="Ul8-c5-qI2">
+                                <rect key="frame" x="0.0" y="65" width="320" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Default Tip Percentage" id="veq-jO-Giq"/>
+                    <connections>
+                        <outlet property="tipPercentagePickerView" destination="Ul8-c5-qI2" id="kGg-gv-dkc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="els-ZR-Rta" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700" y="300"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Ee-9U-9mp">
@@ -188,7 +273,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ik6-l2-vbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198" y="317"/>
+            <point key="canvasLocation" x="200" y="300"/>
         </scene>
     </scenes>
 </document>
