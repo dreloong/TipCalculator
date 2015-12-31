@@ -11,6 +11,7 @@ import UIKit
 class SettingsTableViewController: UITableViewController {
 
     @IBOutlet weak var defaultTipPercentageLabel: UILabel!
+    @IBOutlet weak var themeColorLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +20,10 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
-        let defaultTipPercentage =
-            NSUserDefaults.standardUserDefaults().integerForKey("default_tip_percentage")
-        defaultTipPercentageLabel.text = String(defaultTipPercentage) + "%"
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaultTipPercentageLabel.text =
+            String(defaults.integerForKey("default_tip_percentage")) + "%"
+        themeColorLabel.text = defaults.stringForKey("theme_color_name")
     }
 
     override func didReceiveMemoryWarning() {

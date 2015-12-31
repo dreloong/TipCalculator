@@ -43,15 +43,15 @@ class MainViewController: UIViewController {
             defaults.synchronize()
             updateLabelTexts()
         }
+
+        updateThemeColor()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         inputsView.layer.borderWidth = CGFloat(1)
-        inputsView.layer.borderColor = self.view.tintColor.CGColor
         resultsView.layer.borderWidth = CGFloat(1)
-        resultsView.layer.borderColor = self.view.tintColor.CGColor
 
         tipPercentageStepper.value =
             NSUserDefaults.standardUserDefaults().integerForKey("default_tip_percentage")
@@ -89,6 +89,18 @@ class MainViewController: UIViewController {
         totalAmountLabel.text = String(format: "%.2f", totalAmount)
         perPersonAmountLabel.text =
             String(format: "%.2f", totalAmount / Double(numOfPeopleStepper.value))
+    }
+
+    private func updateThemeColor() {
+        let themeColor = Config.ThemeColor.optionsDict[
+            NSUserDefaults.standardUserDefaults().stringForKey("theme_color_name")!
+        ]
+
+        inputsView.layer.borderColor = themeColor?.CGColor
+        resultsView.layer.borderColor = themeColor?.CGColor
+
+        numOfPeopleStepper.updateColors(themeColor!)
+        tipPercentageStepper.updateColors(themeColor!)
     }
 
 }

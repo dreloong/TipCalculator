@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1440A4241C30619B00FD7BA1 /* UIStepperWithLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1440A4231C30619B00FD7BA1 /* UIStepperWithLabel.swift */; };
+		144564511C34F6F3006F2F96 /* ThemeColorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144564501C34F6F3006F2F96 /* ThemeColorTableViewController.swift */; };
 		14637D321C330BB90059764C /* DefaultTipPercentageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14637D311C330BB90059764C /* DefaultTipPercentageViewController.swift */; };
 		14637D3A1C3339150059764C /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14637D391C3339150059764C /* SettingsTableViewController.swift */; };
 		14637D441C3463F80059764C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14637D431C3463F70059764C /* Config.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		1440A4231C30619B00FD7BA1 /* UIStepperWithLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStepperWithLabel.swift; sourceTree = "<group>"; };
+		144564501C34F6F3006F2F96 /* ThemeColorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThemeColorTableViewController.swift; sourceTree = "<group>"; };
 		14637D311C330BB90059764C /* DefaultTipPercentageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTipPercentageViewController.swift; sourceTree = "<group>"; };
 		14637D391C3339150059764C /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		14637D431C3463F70059764C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				14637D311C330BB90059764C /* DefaultTipPercentageViewController.swift */,
 				147EF00C1C2F2D3E00C25181 /* MainViewController.swift */,
 				14637D391C3339150059764C /* SettingsTableViewController.swift */,
+				144564501C34F6F3006F2F96 /* ThemeColorTableViewController.swift */,
 				1440A4231C30619B00FD7BA1 /* UIStepperWithLabel.swift */,
 				147EEFF01C2F291000C25181 /* Main.storyboard */,
 				147EEFF31C2F291000C25181 /* Images.xcassets */,
@@ -229,6 +232,7 @@
 				1440A4241C30619B00FD7BA1 /* UIStepperWithLabel.swift in Sources */,
 				14637D3A1C3339150059764C /* SettingsTableViewController.swift in Sources */,
 				147EF00D1C2F2D3E00C25181 /* MainViewController.swift in Sources */,
+				144564511C34F6F3006F2F96 /* ThemeColorTableViewController.swift in Sources */,
 				14637D321C330BB90059764C /* DefaultTipPercentageViewController.swift in Sources */,
 				147EEFED1C2F291000C25181 /* AppDelegate.swift in Sources */,
 				14637D441C3463F80059764C /* Config.swift in Sources */,

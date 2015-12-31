@@ -42,18 +42,18 @@ import UIKit
     }
 
     private func initialize() {
-        layer.borderColor = self.tintColor.CGColor
         layer.borderWidth = CGFloat(1)
         initializeButtons()
         initializeLabel()
+
+        let defaults = NSUserDefaults.standardUserDefaults()
+        updateColors(Config.ThemeColor.optionsDict[defaults.stringForKey("theme_color_name")!]!)
     }
 
     private func initializeButtons() {
         for button in [leftButton, rightButton] {
             button.setTitle(button === leftButton ? "-" : "+", forState: .Normal)
-            button.setTitleColor(self.tintColor, forState: .Normal)
             button.layer.borderWidth = CGFloat(1)
-            button.layer.borderColor = self.tintColor.CGColor
 
             button.addTarget(
                 self,
@@ -82,7 +82,6 @@ import UIKit
     private func initializeLabel() {
         label.textAlignment = .Center
         label.text = String(value)
-        label.textColor = self.tintColor
         addSubview(label)
     }
 
@@ -124,6 +123,19 @@ import UIKit
         leftButton.enabled = false
         label.userInteractionEnabled = false
         value += step
+    }
+
+    // MARK: helpers
+
+    func updateColors(color: UIColor) {
+        layer.borderColor = color.CGColor
+
+        for button in [leftButton, rightButton] {
+            button.layer.borderColor = color.CGColor
+            button.setTitleColor(color, forState: .Normal)
+        }
+
+        label.textColor = color
     }
 
 }
