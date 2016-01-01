@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsTableViewController: UITableViewController {
 
+    @IBOutlet var darkModeSwitch: UISwitch!
     @IBOutlet weak var defaultTipPercentageLabel: UILabel!
     @IBOutlet weak var themeColorLabel: UILabel!
 
@@ -21,6 +22,7 @@ class SettingsTableViewController: UITableViewController {
         super.viewWillAppear(animated)
 
         let defaults = NSUserDefaults.standardUserDefaults()
+        darkModeSwitch.setOn(defaults.boolForKey("dark_mode_selected"), animated: animated)
         defaultTipPercentageLabel.text =
             String(defaults.integerForKey("default_tip_percentage")) + "%"
         themeColorLabel.text = defaults.stringForKey("theme_color_name")
@@ -28,6 +30,14 @@ class SettingsTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+
+    // MARK: actions
+
+    @IBAction func onDarkModeSwitchValueChanged(sender: AnyObject) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(darkModeSwitch.on, forKey: "dark_mode_selected")
+        defaults.synchronize()
     }
 
 }

@@ -203,6 +203,12 @@
                         <outlet property="tipAmountLabel" destination="WBv-zx-v1h" id="rEb-gx-wKh"/>
                         <outlet property="tipPercentageStepper" destination="b8n-5Z-HuB" id="O9b-tP-QLo"/>
                         <outlet property="totalAmountLabel" destination="2gj-or-wif" id="xEh-SJ-JBY"/>
+                        <outletCollection property="staticLabels" destination="TAG-xt-keK" collectionClass="NSMutableArray" id="nbK-eY-fxq"/>
+                        <outletCollection property="staticLabels" destination="tds-lz-Pk7" collectionClass="NSMutableArray" id="KbV-rB-dxq"/>
+                        <outletCollection property="staticLabels" destination="u0F-Ji-qOE" collectionClass="NSMutableArray" id="Fr2-k3-fTI"/>
+                        <outletCollection property="staticLabels" destination="kc5-Ki-EHn" collectionClass="NSMutableArray" id="v1n-Ou-ehv"/>
+                        <outletCollection property="staticLabels" destination="RJA-bo-u0l" collectionClass="NSMutableArray" id="xg2-F2-Dwz"/>
+                        <outletCollection property="staticLabels" destination="wRm-Fp-5wC" collectionClass="NSMutableArray" id="9RF-2m-cvj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -283,6 +289,26 @@
                                             <segue destination="KHK-gh-oon" kind="push" id="9jC-93-kCH"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="xvd-iN-XIj" style="IBUITableViewCellStyleDefault" id="mDT-Xu-AW4">
+                                        <rect key="frame" x="0.0" y="223" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mDT-Xu-AW4" id="eay-yN-gHz">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Dark Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xvd-iN-XIj">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="accessoryView" destination="SXk-74-2J8" id="dgn-y2-xP7"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -295,11 +321,19 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="ZnU-B1-D3W"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="darkModeSwitch" destination="SXk-74-2J8" id="zKK-hm-xlr"/>
                         <outlet property="defaultTipPercentageLabel" destination="kn9-vo-4E4" id="UHM-Wr-6Hc"/>
                         <outlet property="themeColorLabel" destination="QZy-Yb-FKp" id="dUe-2D-fJK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="thV-fg-lLb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="SXk-74-2J8">
+                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onDarkModeSwitchValueChanged:" destination="RCf-cr-z95" eventType="valueChanged" id="HC5-Yr-jUd"/>
+                    </connections>
+                </switch>
             </objects>
             <point key="canvasLocation" x="1200" y="300"/>
         </scene>

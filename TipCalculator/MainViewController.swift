@@ -19,6 +19,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var tipPercentageStepper: UIStepperWithLabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
 
+    @IBOutlet var staticLabels: [UILabel]!
+
     private var billAmount: Double = 0 {
         didSet {
             updateLabelTexts()
@@ -41,21 +43,19 @@ class MainViewController: UIViewController {
             tipPercentageStepper.value = defaults.integerForKey("default_tip_percentage")
             defaults.setBool(false, forKey: "default_tip_percentage_updated")
             defaults.synchronize()
-            updateLabelTexts()
         }
 
-        updateThemeColor()
+        setThemeColor(Config.ThemeColor.optionsDict[defaults.stringForKey("theme_color_name")!]!)
+        updateLabelTexts()
+        updateLightDarkMode()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        inputsView.layer.borderWidth = CGFloat(1)
-        resultsView.layer.borderWidth = CGFloat(1)
-
         tipPercentageStepper.value =
             NSUserDefaults.standardUserDefaults().integerForKey("default_tip_percentage")
-        updateLabelTexts()
+        setBorderWidth(Config.borderWidth)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,6 +82,40 @@ class MainViewController: UIViewController {
 
     // MARK: helpers
 
+    private func setBackgroundColor(color: UIColor) {
+        view.backgroundColor = color
+        inputsView.backgroundColor = color
+        resultsView.backgroundColor = color
+        numOfPeopleStepper.backgroundColor = color
+        tipPercentageStepper.backgroundColor = color
+    }
+
+    private func setBorderWidth(width: CGFloat) {
+        inputsView.layer.borderWidth = width
+        resultsView.layer.borderWidth = width
+        numOfPeopleStepper.setBorderWidth(width)
+        tipPercentageStepper.setBorderWidth(width)
+    }
+
+    private func setTextColor(color: UIColor) {
+        for label in staticLabels {
+            label.textColor = color
+        }
+
+        billAmountField.textColor = color
+        perPersonAmountLabel.textColor = color
+        tipAmountLabel.textColor = color
+        totalAmountLabel.textColor = color
+    }
+
+    private func setThemeColor(color: UIColor) {
+        inputsView.layer.borderColor = color.CGColor
+        resultsView.layer.borderColor = color.CGColor
+
+        numOfPeopleStepper.setThemeColor(color)
+        tipPercentageStepper.setThemeColor(color)
+    }
+
     private func updateLabelTexts() {
         let tipAmount = billAmount * Double(tipPercentageStepper.value) * 0.01
         let totalAmount = billAmount + tipAmount
@@ -91,16 +125,18 @@ class MainViewController: UIViewController {
             String(format: "%.2f", totalAmount / Double(numOfPeopleStepper.value))
     }
 
-    private func updateThemeColor() {
-        let themeColor = Config.ThemeColor.optionsDict[
-            NSUserDefaults.standardUserDefaults().stringForKey("theme_color_name")!
-        ]
-
-        inputsView.layer.borderColor = themeColor?.CGColor
-        resultsView.layer.borderColor = themeColor?.CGColor
-
-        numOfPeopleStepper.updateColors(themeColor!)
-        tipPercentageStepper.updateColors(themeColor!)
+    private func updateLightDarkMode() {
+        if (NSUserDefaults.standardUserDefaults().boolForKey("dark_mode_selected")) {
+            billAmountField.backgroundColor = Config.TextFieldBackgroundColor.darkModeColor
+            billAmountField.keyboardAppearance = .Dark
+            setBackgroundColor(Config.BackgroundColor.darkModeColor)
+            setTextColor(Config.TextColor.darkModeColor)
+        } else {
+            billAmountField.backgroundColor = Config.TextFieldBackgroundColor.lightModeColor
+            billAmountField.keyboardAppearance = .Light
+            setBackgroundColor(Config.BackgroundColor.lightModeColor)
+            setTextColor(Config.TextColor.lightModeColor)
+        }
     }
 
 }

@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         super.init()
 
         NSUserDefaults.standardUserDefaults().registerDefaults([
+            "dark_mode_selected": Config.darkModeInitSelected,
             "default_tip_percentage": Config.TipPercentage.initValue,
             "default_tip_percentage_updated": false,
             "theme_color_name": Config.ThemeColor.initOptionKey

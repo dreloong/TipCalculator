@@ -42,18 +42,13 @@ import UIKit
     }
 
     private func initialize() {
-        layer.borderWidth = CGFloat(1)
         initializeButtons()
         initializeLabel()
-
-        let defaults = NSUserDefaults.standardUserDefaults()
-        updateColors(Config.ThemeColor.optionsDict[defaults.stringForKey("theme_color_name")!]!)
     }
 
     private func initializeButtons() {
         for button in [leftButton, rightButton] {
             button.setTitle(button === leftButton ? "-" : "+", forState: .Normal)
-            button.layer.borderWidth = CGFloat(1)
 
             button.addTarget(
                 self,
@@ -127,7 +122,13 @@ import UIKit
 
     // MARK: helpers
 
-    func updateColors(color: UIColor) {
+    func setBorderWidth(width: CGFloat) {
+        for view in [self, leftButton, rightButton] {
+            view.layer.borderWidth = width
+        }
+    }
+
+    func setThemeColor(color: UIColor) {
         layer.borderColor = color.CGColor
 
         for button in [leftButton, rightButton] {
